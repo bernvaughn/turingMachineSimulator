@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 import sys
+import collections
 
 class State:
     ''''''
@@ -48,8 +49,10 @@ class Tape:
     ''''''
     # TODO: add info for Tape class
     
-    _tapeString = ""
+    _tape = collections.deque('') # placeholder
     _currentPosition = 0
+
+    # TODO: add tape init function like: new Tape('010101')
 
     # TODO: add tape functions
 
