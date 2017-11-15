@@ -52,11 +52,17 @@ class Tape:
     _tape = collections.deque('') # placeholder
     _currentPosition = 0
 
-    # TODO: add tape init function like: new Tape('010101')
+    def __init__(self,tapestring):
+        # TODO: make tapestring optional, default to blank tape
+        self._tape = collections.deque(tapestring)
+        self._currentPosition = 0
 
     # TODO: add tape functions
 
     # TODO: add tape load function
+    def load(self,tapestring):
+        self._tape = collections.deque(tapestring)
+        self._currentPosition = 0
 
 # TODO: add main
     
