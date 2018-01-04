@@ -26,13 +26,15 @@ class State:
         exception: AttributeError if symbol is already known to state
         '''
         if symbol in _recognizedSymbols:
-            raise AttributeError(str(symbol)+" already known in this state.")
+            raise AttributeError(symbol+" already known in this state.")
+        _checkTransition(transition)
         self.setTransition(self,symbol,transition)
 
     def setTransition(self,symbol,transition):
         '''in: symbol as character
         in: transition as string. ex: 0>newState
         '''
+        _checkTransition(transition)
         _recognizedSymbols[symbol] = transition
 
     def _checkTransition(self,transition):
@@ -52,14 +54,31 @@ class Tape:
     _tape = collections.deque('') # placeholder
     _currentPosition = 0
 
-    def __init__(self,tapestring):
-        # TODO: make tapestring optional, default to blank tape
+    def __init__(self,tapestring=''):
         self._tape = collections.deque(tapestring)
         self._currentPosition = 0
 
-    # TODO: add tape functions
+    # TODO: add tape functions: write, read, move
+    def move(self,direction):
+        '''Updates currentPosition
+        in: direction as either -1,0,1
+        -1 is left, 1 is right, 0 is no move
+        '''
+        self._currentPosition+=direction
 
-    # TODO: add tape load function
+    def read(self):
+        '''returns the symbol at the currentPosition
+        out: character that has been read
+        '''
+        return self._tape[self._currentPosition]
+
+    def write(self,newCharacter):
+        '''updates the character at currentPosition.
+        in: newCharacter as character
+        '''
+        self._tape[self._currentPosition] = newCharacter
+
+    # TODO: verify that this does what i want
     def load(self,tapestring):
         self._tape = collections.deque(tapestring)
         self._currentPosition = 0
